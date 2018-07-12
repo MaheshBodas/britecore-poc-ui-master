@@ -21,11 +21,7 @@
         <el-button type="primary" style="width:100%;" :loading="loading" @click.native.prevent="handleLogin">
           Sign in
         </el-button>
-      </el-form-item>
-      <div class="tips">
-        <span style="margin-right:20px;">username: admin</span>
-        <span> password: admin</span>
-      </div>
+      </el-form-item>      
     </el-form>
   </div>
 </template>

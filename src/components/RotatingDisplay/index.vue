@@ -131,17 +131,17 @@ body {
     color: #333;
   }
   .el-carousel__item h3 {
-    color: #475669;
+    color: #868e96;
     font-size: 15px;
     opacity: 0.75;
     line-height: 20px;
     margin: 0;    
   }
   .el-carousel__item:nth-child(2n) {
-    background-color: gray;color: white;
+    background-color: goldenrod;color:gray;
   }
   .el-carousel__item:nth-child(2n+1) {
-    background-color: gray;color: white;
+    background-color: goldenrod;color: gray;
   }
   @import url("https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.4.0/theme-chalk/index.css")
 </style>

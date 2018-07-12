@@ -4,6 +4,7 @@
       <el-header style="height: 90px; border: 1px solid #eee">
         <div class="dashboard-label">Hi, {{name}}</div>
         <div class="dashboard-label">Roles:<span v-for='role in roles' :key='role'>{{role}}</span></div>
+        <div class="dashboard-label">This site is best viewed with latest Firefox or Chrome with 80% zoom.</div>
       </el-header>       
       <el-main style="height: 350px; border: 1px solid #eee">  
         <rotating-display v-bind:helpTextArray="carouselhelptext"></rotating-display>
@@ -67,7 +68,7 @@ export default {
     line-height: 20px;
     margin: 0;
     text-align: right;       
-    background-color: lightblue;color: navy;
+    background-color: lightblue;color: blue;
  } 
 .dashboard {
   &-container {
