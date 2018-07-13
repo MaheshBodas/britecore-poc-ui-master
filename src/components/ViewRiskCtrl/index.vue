@@ -8,7 +8,7 @@
         <el-form ref="risktypeForm" :model="selectRiskInstance" label-position="left" label-width="130px" style='width: 100%;align:left; margin-left:5px;'>
           <el-row :gutter="20">        
             <el-col :span="16">                                   
-              <el-form-item label="Select Risk Type" size="mini" prop="risk_type_name">                
+              <el-form-item label="Select Risk" size="mini" prop="risk_type_name">                
                   <risk-instance-list @change="selectRiskInstanceChanged" :selectedType="selectRiskInstance"></risk-instance-list>                                                
               </el-form-item>              
             </el-col>              

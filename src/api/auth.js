@@ -55,7 +55,7 @@ export default {
     return session.get('/riskkeys/')
   },
   getRisks(risk_type_id) {
-    return session.get('/risks/?id=' + risk_type_id)
+    return session.get('/risks/?risktype=' + risk_type_id)
   }
   // Risk API related functions
 }
