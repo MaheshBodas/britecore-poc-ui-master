@@ -25,9 +25,6 @@ npm run build
 npm run build --report
 ```
 
-## Demo
-![demo](https://github.com/MaheshBodas/britecore-poc-ui-master/blob/master/blob/Dashboard.png)
-
 
 ## License
 [MIT](https://github.com/PanJiaChen/vueAdmin-template/blob/master/LICENSE) license.
