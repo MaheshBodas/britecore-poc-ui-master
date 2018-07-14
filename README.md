@@ -3,7 +3,7 @@
 > A BriteCore PoC UI allow user to Create RiskTypes and Risk based on RiskTypes. User can browse RiskTypes and Risk. It uses Element UI & axios & iconfont & permission control & lint
 
 ## Demo
-![demo](https://britecore-poc-ui.herokuapp.com)
+![demo](https://github.com/MaheshBodas/britecore-poc-ui-master/blob/master/blob/Dashboard.png)
 
 ## Build Setup
 
@@ -26,7 +26,7 @@ npm run build --report
 ```
 
 ## Demo
-![demo](https://github.com/MaheshBodas/britecore-poc-ui-master/blob/Dashboard.png)
+![demo](https://github.com/MaheshBodas/britecore-poc-ui-master/blob/master/blob/Dashboard.png)
 
 
 ## License
