@@ -3,6 +3,9 @@ import session from '@/utils/request'
 
 export default {
   login(username, password) {
+    console.log('BASE_API:' + process.env.BASE_API)
+    console.log('Username:' + username)
+    // console.log('Password:' + password)
     return session.post('/auth/login/', { username, password })
   },
   retrievetoken(username, password) {

@@ -48,19 +48,6 @@ const riskapi = {
         })
       })
     },
-    getRiskTypeKeys({ commit }) {
-      return new Promise((resolve, reject) => {
-        auth.getRiskTypeKeys().then(response => {
-          const data = response
-          console.log('getRiskTypeKeys Response Data')
-          console.log(data)
-          resolve(data)
-        }).catch(error => {
-          console.log('Error in getRiskTypeKeys')
-          reject(error)
-        })
-      })
-    },
     getRiskType({ commit }, risk_type_id) {
       return new Promise((resolve, reject) => {
         auth.getRiskType(risk_type_id).then(response => {
@@ -83,45 +70,6 @@ const riskapi = {
           resolve()
         }).catch(error => {
           console.log('Error in createRisk')
-          reject(error)
-        })
-      })
-    },
-    getRiskKeys({ commit }) {
-      return new Promise((resolve, reject) => {
-        auth.getRiskKeys().then(response => {
-          const data = response
-          console.log('getRiskKeys Response Data')
-          console.log(data)
-          resolve(data)
-        }).catch(error => {
-          console.log('Error in getRiskKeys')
-          reject(error)
-        })
-      })
-    },
-    getRisk({ commit }, risk_id) {
-      return new Promise((resolve, reject) => {
-        auth.getRisk(risk_id).then(response => {
-          const data = response
-          console.log('getRisk Response Data')
-          console.log(data)
-          resolve(data)
-        }).catch(error => {
-          console.log('Error in getRisk')
-          reject(error)
-        })
-      })
-    },
-    getRisks({ commit }, risk_type_id) {
-      return new Promise((resolve, reject) => {
-        auth.getRisks(risk_type_id).then(response => {
-          const data = response
-          console.log('getRisks Response Data')
-          console.log(data)
-          resolve(data)
-        }).catch(error => {
-          console.log('Error in getRisks')
           reject(error)
         })
       })

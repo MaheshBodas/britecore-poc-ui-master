@@ -77,7 +77,9 @@ export default {
   computed: {
     ...mapGetters([
       'apiresult',
-      'apiexception'
+      'apiexception',
+      'allrisks',
+      'allcolumns'
     ])
   },
   // methods that implement data logic.
@@ -86,7 +88,7 @@ export default {
     capitalize: function(str) {
       return str.charAt(0).toUpperCase() + str.slice(1)
     },
-    currencyFilter(curvalue) {
+    currencyFilter: function(curvalue) {
       if (arguments.length === 0) {
         return null
       }
@@ -112,9 +114,8 @@ export default {
       this.listLoading = true
       this.$store.dispatch('getRisks', this.selectRiskType.risktype).then(response => {
         if (this.apiresult === true) {
-          this.resetRiskFormData()
-          this.riskinstances = response
-          this.processRiskInstancesDataFromServer()
+          this.riskinstances = this.allrisks
+          this.columnNames = this.allcolumns
           this.listLoading = false
         }
       }).catch(() => {
@@ -127,25 +128,21 @@ export default {
       })
     },
     resetRiskFormData() {
+      this.listLoading = true
+      this.$store.dispatch('resetRisks').then(() => {
+        this.riskinstances = this.allrisks
+        this.columnNames = this.allcolumns
+        this.listLoading = false
+      }).catch(() => {
+        this.$notify({
+          title: 'Error',
+          message: this.apiexception,
+          type: 'error',
+          duration: 2000
+        })
+      })
       this.riskinstances = null
       this.columnNames = []
-    },
-    processRiskInstancesDataFromServer() {
-      if (this.riskinstances) {
-        console.log('this.riskinstances')
-        console.log(this.riskinstances.length)
-        var i
-        if (this.riskinstances && this.riskinstances.length > 0) {
-          var riskinstance = this.riskinstances[0]
-          if (riskinstance.risk_riskfields && riskinstance.risk_riskfields.length > 0) {
-            var riskfields = riskinstance.risk_riskfields
-            for (i = 0; i < riskfields.length; i++) {
-              var risk_type_field_name = riskfields[i].risk_type_field_name
-              this.columnNames.push(risk_type_field_name)
-            }
-          }
-        }
-      }
     }
   }
 }

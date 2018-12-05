@@ -5,6 +5,11 @@ const getters = {
   name: state => state.user.name,
   roles: state => state.user.roles,
   apiresult: state => state.riskapi.apiresult,
-  apiexception: state => state.riskapi.apiexception
+  apiexception: state => state.riskapi.apiexception,
+  risktypekeyoptions: state => state.risktypekeys.risktypekeyoptions,
+  riskkeyoptions: state => state.riskkeys.riskkeyoptions,
+  singlerisk: state => state.singleriskinstance.singlerisk,
+  allrisks: state => state.allriskinstances.allrisks,
+  allcolumns: state => state.allriskinstances.allcolumns
 }
 export default getters

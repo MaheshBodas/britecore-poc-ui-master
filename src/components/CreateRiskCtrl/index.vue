@@ -60,7 +60,8 @@ import RiskInput from '@/components/RiskInput'
 import RiskTypeList from '@/components/RiskTypeList'
 import RotatingDisplay from '@/components/RotatingDisplay'
 import { RiskPostData, RiskCtrlConst } from './classes'
-import { RiskFieldInstance } from '../RiskInput/classes'
+// import { RiskFieldInstance } from '../RiskInput/classes'
+import { RiskFieldInstance } from '@/utils/riskfieldinstance'
 import { RequiredValidatorBuilder, RequiredNumberValidatorBuilder } from './classes.js'
 export default {
   name: 'create-risk-ctrl',

@@ -69,7 +69,8 @@ https://jsfiddle.net/z11fe07p/421/ */
   </div>
 </template>
 <script>
-import { RiskFieldInstance } from './classes'
+// import { RiskFieldInstance } from './classes'
+import { RiskFieldInstance } from '@/utils/riskfieldinstance'
 import CurrencyInput from '@/components/CurrencyInput'
 export default {
   name: 'risk-input',

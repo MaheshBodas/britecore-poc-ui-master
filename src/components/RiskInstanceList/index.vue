@@ -25,7 +25,8 @@ export default {
   computed: {
     ...mapGetters([
       'apiresult',
-      'apiexception'
+      'apiexception',
+      'riskkeyoptions'
     ])
   },
   data: function() {
@@ -51,25 +52,14 @@ export default {
       // this.value = this.preSelect
       // this.selectedType.risk_type_field_enum = this.preSelect
       this.selectedType.riskinstance = ''
-      var riskinstanceoptions = []
-      // TBD Original
-      /*
-      var i
-      for (i = 0; i < window.riskinstanceoptions.length; i++) {
-        this.options.push({ text: window.riskinstanceoptions[i].risk_name, value: window.riskinstanceoptions[i].id })
-      }
-      */
-      // TBD Original
-      // TBD
-      this.$store.dispatch('getRiskKeys').then(response => {
+      this.$store.dispatch('getRiskKeys').then(() => {
         if (this.apiresult === true) {
-          riskinstanceoptions = response
           var i
           // write response
           console.log('getRiskKeys in RiskList')
-          console.log(riskinstanceoptions)
-          for (i = 0; i < riskinstanceoptions.length; i++) {
-            this.options.push({ text: riskinstanceoptions[i].risk_name, value: riskinstanceoptions[i].id })
+          console.log(this.riskkeyoptions)
+          for (i = 0; i < this.riskkeyoptions.length; i++) {
+            this.options.push({ text: this.riskkeyoptions[i].risk_name, value: this.riskkeyoptions[i].id })
           }
         }
       }).catch(() => {

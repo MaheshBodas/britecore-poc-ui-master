@@ -21,7 +21,8 @@ export default {
   computed: {
     ...mapGetters([
       'apiresult',
-      'apiexception'
+      'apiexception',
+      'risktypekeyoptions'
     ])
   },
   data: function() {
@@ -47,16 +48,15 @@ export default {
       // this.value = this.preSelect
       // this.selectedType.risk_type_field_enum = this.preSelect
       this.selectedType.risktype = ''
-      var risktypeoptions = []
-      this.$store.dispatch('getRiskTypeKeys').then(response => {
+      // var risktypekeyoptions = []
+      this.$store.dispatch('getRiskTypeKeys').then(() => {
         if (this.apiresult === true) {
-          risktypeoptions = response
           var i
           // write response
           console.log('getRiskTypeKeys in RiskTypeList')
-          console.log(risktypeoptions)
-          for (i = 0; i < risktypeoptions.length; i++) {
-            this.options.push({ text: risktypeoptions[i].risk_type_name, value: risktypeoptions[i].id })
+          console.log(this.risktypekeyoptions)
+          for (i = 0; i < this.risktypekeyoptions.length; i++) {
+            this.options.push({ text: this.risktypekeyoptions[i].risk_type_name, value: this.risktypekeyoptions[i].id })
           }
         }
       }).catch(() => {
@@ -67,7 +67,7 @@ export default {
           duration: 2000
         })
       })
-      //
+      // TBD
     },
     selectChanged: function(value) {
       // alert('Emitting change event')

@@ -55,18 +55,13 @@ import { mapGetters } from 'vuex'
 import RiskInput from '@/components/RiskInput'
 import RiskInstanceList from '@/components/RiskInstanceList'
 import RotatingDisplay from '@/components/RotatingDisplay'
-import { Risk, RiskCtrlConst } from './classes'
-import { RiskFieldInstance } from '../RiskInput/classes'
+import { RiskCtrlConst } from './classes'
 export default {
   name: 'view-risk-ctrl',
   components: {
-    // CurrencyInput,
     RiskInput,
     RiskInstanceList,
     RotatingDisplay
-    // RiskFieldTypeList
-    // CreateRiskTypeCtrl
-    // RiskInputGrid
   },
   data: function() {
     return {
@@ -95,7 +90,8 @@ export default {
   computed: {
     ...mapGetters([
       'apiresult',
-      'apiexception'
+      'apiexception',
+      'singlerisk'
     ]),
     rowCount: function() {
       if (this.riskobj !== null) {
@@ -125,12 +121,9 @@ export default {
     },
     fetchRiskInstanceData() {
       this.listLoading = true
-      this.$store.dispatch('getRisk', this.selectRiskInstance.riskinstance).then(response => {
+      this.$store.dispatch('getRisk', this.selectRiskInstance.riskinstance).then(() => {
         if (this.apiresult === true) {
-          this.resetRiskFormData()
-          var riskdata = response
-          var riskobj = riskdata[0]
-          this.processRiskInstanceDataFromServer(riskobj)
+          this.riskobj = this.singlerisk
           this.listLoading = false
         }
       }).catch(() => {
@@ -142,41 +135,19 @@ export default {
         })
       })
     },
-    processRiskInstanceDataFromServer(riskinstance) {
-      if (riskinstance && riskinstance.risk_riskfields) {
-        console.log('riskinstance.risk_riskfields')
-        console.log(riskinstance.risk_riskfields.length)
-        var i
-        // this.resetRiskFormData()
-        this.riskobj.id = riskinstance.id
-        this.riskobj.risktype = riskinstance.risktype
-        this.riskobj.risk_type_name = riskinstance.risk_type_name
-        this.riskobj.risk_name = riskinstance.risk_name
-        this.riskobj.risk_description = riskinstance.risk_description
-        // Populate RiskFields collection from data received from server
-        var riskfields = riskinstance.risk_riskfields
-        // this.riskobj = new Risk(id, risktype, risk_type_name, risk_name, risk_description, riskfields)
-        for (i = 0; i < riskfields.length; i++) {
-          // var rfid = riskfields[i].id
-          var risktypefield = riskfields[i].risktypefield
-          // var risk = riskfields[i].risk
-          var risk_type_field_name = riskfields[i].risk_type_field_name
-          var risk_type_field_enum = riskfields[i].risk_type_field_enum
-          var risk_field_value = riskfields[i].risk_field_value
-          if (risk_type_field_enum === 'currency') {
-            risk_field_value = parseFloat(riskfields[i].risk_field_value)
-          }
-          var riskFieldInstance = new RiskFieldInstance(this.riskobj.risktype, risktypefield, risk_type_field_name, risk_type_field_enum, '', risk_field_value)
-          // console.log(riskInstance)
-          this.riskobj.riskfields.push(riskFieldInstance)
-        }
-      }
-    },
     resetRiskFormData() {
-      this.riskobj = new Risk()
-      this.riskobj.risk_name = ''
-      this.riskobj.risk_description = ''
-      this.riskobj.riskfields = []
+      this.listLoading = true
+      this.$store.dispatch('resetRisks').then(() => {
+        this.riskobj = this.singlerisk
+        this.listLoading = false
+      }).catch(() => {
+        this.$notify({
+          title: 'Error',
+          message: this.apiexception,
+          type: 'error',
+          duration: 2000
+        })
+      })
     }
   }
 }
