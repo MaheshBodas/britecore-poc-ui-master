@@ -137,7 +137,7 @@ export default {
     },
     resetRiskFormData() {
       this.listLoading = true
-      this.$store.dispatch('resetRisks').then(() => {
+      this.$store.dispatch('resetRiskObj').then(() => {
         this.riskobj = this.singlerisk
         this.listLoading = false
       }).catch(() => {
