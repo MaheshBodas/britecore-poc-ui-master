@@ -3,15 +3,20 @@ const allriskinstances = {
   state: {
     apiresult: '',
     apiexception: '',
-    allrisks: null,
+    allrisks: [],
     allcolumns: []
   },
   mutations: {
     SET_ALLRISKS: (state, allrisks) => {
-      state.allrisks = allrisks
+      // for (var value of allrisks) {
+      //   state.allrisks.push(value)
+      // }
+      state.allrisks.length = 0
+      state.allrisks.push(...allrisks)
     },
     SET_ALLCOLUMNS: (state, allcolumns) => {
-      state.allcolumns = allcolumns
+      state.allcolumns.length = 0
+      state.allcolumns.push(...allcolumns)
     }
   },
   actions: {
@@ -20,12 +25,11 @@ const allriskinstances = {
         auth.getRisks(risk_type_id).then(response => {
           const riskinstances = response
           const columnNames = []
-          console.log('getRisks Response Data')
-          console.log(riskinstances)
-          //
+          // console.log('getRisks Response Data')
+          // console.log(riskinstances)
           if (riskinstances) {
-            console.log('riskinstances')
-            console.log(riskinstances.length)
+            // console.log('riskinstances')
+            // console.log(riskinstances.length)
             var i
             if (riskinstances && riskinstances.length > 0) {
               var riskinstance = riskinstances[0]
@@ -37,6 +41,8 @@ const allriskinstances = {
                 }
               }
             }
+            // console.log('columnNames')
+            // console.log(columnNames)
           }
           commit('SET_ALLRISKS', riskinstances)
           commit('SET_ALLCOLUMNS', columnNames)
@@ -49,8 +55,8 @@ const allriskinstances = {
     },
     resetRisks({ commit }, risk_id) {
       return new Promise((resolve) => {
-        commit('SET_ALLRISKS', null)
-        commit('SET_SINGLERISK', [])
+        commit('SET_ALLRISKS', [])
+        commit('SET_ALLCOLUMNS', [])
         resolve()
       })
     }

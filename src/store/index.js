@@ -7,7 +7,7 @@ import risktypekeys from './modules/risktypekeys'
 import riskkeys from './modules/riskkeys'
 import singleriskinstance from './modules/singleriskinstance'
 import allriskinstances from './modules/allriskinstances'
-import auth from './modules/auth'
+// import auth from './modules/auth'
 // import types from './modules/types'
 import getters from './getters'
 
@@ -16,7 +16,7 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
   modules: {
     app,
-    auth,
+    // auth,
     // types,
     riskapi,
     risktypekeys,

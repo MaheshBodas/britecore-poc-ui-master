@@ -8,7 +8,7 @@ const getters = {
   apiexception: state => state.riskapi.apiexception,
   risktypekeyoptions: state => state.risktypekeys.risktypekeyoptions,
   riskkeyoptions: state => state.riskkeys.riskkeyoptions,
-  singlerisk: state => state.singleriskinstance.singlerisk,
+  singlerisk: state => state.singleriskinstance.allrisks[0],
   allrisks: state => state.allriskinstances.allrisks,
   allcolumns: state => state.allriskinstances.allcolumns
 }

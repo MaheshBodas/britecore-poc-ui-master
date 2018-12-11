@@ -7,7 +7,8 @@ const risktypekeys = {
   },
   mutations: {
     SET_RISKTYPEKEYOPTIONS: (state, risktypekeyoptions) => {
-      state.risktypekeyoptions = risktypekeyoptions
+      state.risktypekeyoptions.length = 0
+      state.risktypekeyoptions.push(...risktypekeyoptions)
     }
   },
   actions: {

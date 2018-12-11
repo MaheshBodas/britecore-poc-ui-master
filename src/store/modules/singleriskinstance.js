@@ -6,11 +6,14 @@ const singleriskinstance = {
   state: {
     apiresult: '',
     apiexception: '',
-    singlerisk: null
+    allrisks: []
+    // singlerisk: null
   },
   mutations: {
     SET_SINGLERISK: (state, singlerisk) => {
-      state.singlerisk = singlerisk
+      // state.singlerisk = singlerisk
+      state.allrisks.length = 0
+      state.allrisks.push(singlerisk)
     }
   },
   actions: {
@@ -19,13 +22,13 @@ const singleriskinstance = {
       return new Promise((resolve, reject) => {
         auth.getRisk(risk_id).then(response => {
           var riskdata = response
-          console.log('getRisk Response Data')
-          console.log(riskdata)
+          // console.log('getRisk Response Data')
+          // console.log(riskdata)
           var riskinstance = riskdata[0]
           var riskobj = null
           if (riskinstance && riskinstance.risk_riskfields) {
-            console.log('riskinstance.risk_riskfields')
-            console.log(riskinstance.risk_riskfields.length)
+            // console.log('riskinstance.risk_riskfields')
+            // console.log(riskinstance.risk_riskfields.length)
             var i
             // this.resetRiskFormData()
             riskobj = new Risk()
@@ -52,7 +55,8 @@ const singleriskinstance = {
               riskobj.riskfields.push(riskFieldInstance)
             }
           }
-          console.log(riskobj)
+          // console.log('SET_SINGLERISK riskobj')
+          // console.log(JSON.stringify(riskobj))
           commit('SET_SINGLERISK', riskobj)
           resolve()
         }).catch(error => {
