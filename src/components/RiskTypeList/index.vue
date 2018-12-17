@@ -53,8 +53,8 @@ export default {
         if (this.apiresult === true) {
           var i
           // write response
-          console.log('getRiskTypeKeys in RiskTypeList')
-          console.log(this.risktypekeyoptions)
+          // console.log('getRiskTypeKeys in RiskTypeList')
+          // console.log(this.risktypekeyoptions)
           for (i = 0; i < this.risktypekeyoptions.length; i++) {
             this.options.push({ text: this.risktypekeyoptions[i].risk_type_name, value: this.risktypekeyoptions[i].id })
           }

@@ -70,7 +70,7 @@ https://jsfiddle.net/z11fe07p/421/ */
 </template>
 <script>
 // import { RiskFieldInstance } from './classes'
-import { RiskFieldInstance } from '@/utils/riskfieldinstance'
+// import { RiskFieldInstance } from '@/utils/riskfieldinstance'
 import CurrencyInput from '@/components/CurrencyInput'
 export default {
   name: 'risk-input',
@@ -78,7 +78,8 @@ export default {
     CurrencyInput
   },
   props: {
-    input_type: RiskFieldInstance,
+    // input_type: RiskFieldInstance,
+    input_type: Object,
     isReadonly: Boolean,
     dataval: Object,
     value: Object

@@ -4,16 +4,47 @@ import { Risk } from '@/utils/risk'
 
 const singleriskinstance = {
   state: {
-    apiresult: '',
-    apiexception: '',
     allrisks: []
     // singlerisk: null
   },
   mutations: {
-    SET_SINGLERISK: (state, singlerisk) => {
-      // state.singlerisk = singlerisk
+    SET_SINGLERISK: (state, riskinstance) => {
+      var riskobj = null
+      if (riskinstance && riskinstance.risk_riskfields) {
+        // console.log('riskinstance.risk_riskfields')
+        // console.log(riskinstance.risk_riskfields.length)
+        riskobj = new Risk()
+        riskobj.id = riskinstance.id
+        riskobj.risktype = riskinstance.risktype
+        riskobj.risk_type_name = riskinstance.risk_type_name
+        riskobj.risk_name = riskinstance.risk_name
+        riskobj.risk_description = riskinstance.risk_description
+        // Populate RiskFields collection from data received from server
+        var riskfields = riskinstance.risk_riskfields
+        for (var riskfield of riskfields) {
+          var { risktypefield, risk_type_field_name, risk_type_field_enum, risk_field_value } =
+                  { risktypefield: riskfield.risktypefield,
+                    risk_type_field_name: riskfield.risk_type_field_name,
+                    risk_type_field_enum: riskfield.risk_type_field_enum,
+                    risk_field_value: riskfield.risk_field_value }
+          if (risk_type_field_enum === 'currency') {
+            risk_field_value = parseFloat(riskfield.risk_field_value)
+          }
+          var riskFieldInstance = new RiskFieldInstance(riskobj.risktype,
+            risktypefield,
+            risk_type_field_name,
+            risk_type_field_enum,
+            '',
+            risk_field_value)
+          // console.log(riskInstance)
+          riskobj.riskfields.push(riskFieldInstance)
+        }
+      }
+      // console.log('SET_SINGLERISK riskobj')
+      // console.log(JSON.stringify(riskobj))
+      // Cut and paste
       state.allrisks.length = 0
-      state.allrisks.push(singlerisk)
+      state.allrisks.push(riskobj)
     }
   },
   actions: {
@@ -25,39 +56,7 @@ const singleriskinstance = {
           // console.log('getRisk Response Data')
           // console.log(riskdata)
           var riskinstance = riskdata[0]
-          var riskobj = null
-          if (riskinstance && riskinstance.risk_riskfields) {
-            // console.log('riskinstance.risk_riskfields')
-            // console.log(riskinstance.risk_riskfields.length)
-            var i
-            // this.resetRiskFormData()
-            riskobj = new Risk()
-            riskobj.id = riskinstance.id
-            riskobj.risktype = riskinstance.risktype
-            riskobj.risk_type_name = riskinstance.risk_type_name
-            riskobj.risk_name = riskinstance.risk_name
-            riskobj.risk_description = riskinstance.risk_description
-            // Populate RiskFields collection from data received from server
-            var riskfields = riskinstance.risk_riskfields
-            // this.riskobj = new Risk(id, risktype, risk_type_name, risk_name, risk_description, riskfields)
-            for (i = 0; i < riskfields.length; i++) {
-              // var rfid = riskfields[i].id
-              var risktypefield = riskfields[i].risktypefield
-              // var risk = riskfields[i].risk
-              var risk_type_field_name = riskfields[i].risk_type_field_name
-              var risk_type_field_enum = riskfields[i].risk_type_field_enum
-              var risk_field_value = riskfields[i].risk_field_value
-              if (risk_type_field_enum === 'currency') {
-                risk_field_value = parseFloat(riskfields[i].risk_field_value)
-              }
-              var riskFieldInstance = new RiskFieldInstance(riskobj.risktype, risktypefield, risk_type_field_name, risk_type_field_enum, '', risk_field_value)
-              // console.log(riskInstance)
-              riskobj.riskfields.push(riskFieldInstance)
-            }
-          }
-          // console.log('SET_SINGLERISK riskobj')
-          // console.log(JSON.stringify(riskobj))
-          commit('SET_SINGLERISK', riskobj)
+          commit('SET_SINGLERISK', riskinstance)
           resolve()
         }).catch(error => {
           console.log(error)

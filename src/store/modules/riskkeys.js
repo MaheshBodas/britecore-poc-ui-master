@@ -1,8 +1,6 @@
 import auth from '@/api/auth'
 const riskkeys = {
   state: {
-    apiresult: '',
-    apiexception: '',
     riskkeyoptions: []
   },
   mutations: {
@@ -17,8 +15,8 @@ const riskkeys = {
       return new Promise((resolve, reject) => {
         auth.getRiskKeys().then(response => {
           const data = response
-          console.log('getRiskKeys Response Data')
-          console.log(data)
+          // console.log('getRiskKeys Response Data')
+          // console.log(data)
           commit('SET_RISKKEYOPTIONS', data)
           resolve()
         }).catch(error => {

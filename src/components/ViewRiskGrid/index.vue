@@ -15,7 +15,7 @@
           </el-row> 
         </el-form>                
         <el-form v-if="riskinstances && riskinstances.length > 0" label-position="left"  style='width: 100%;align:left; margin-left:5px;'>          
-          <el-table :data="riskinstances" v-loading="listLoading" element-loading-text="Give me some more time" border fit highlight-current-row
+          <el-table :data="riskinstances" v-bind:v-loading="listLoading" element-loading-text="Give me some more time" border fit highlight-current-row
             style="width: 100%">       
             <el-table-column  label="Risk Name">
               <template slot-scope="scope">
@@ -61,7 +61,7 @@ export default {
   },
   data: function() {
     return {
-      listLoading: true,
+      listLoading: false,
       carouselhelptext: [],
       selectRiskType: {
         risktype: ''
@@ -119,6 +119,7 @@ export default {
           this.listLoading = false
         }
       }).catch(() => {
+        this.listLoading = false
         this.$notify({
           title: 'Error',
           message: this.apiexception,

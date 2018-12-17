@@ -1,8 +1,6 @@
 import auth from '@/api/auth'
 const allriskinstances = {
   state: {
-    apiresult: '',
-    apiexception: '',
     allrisks: [],
     allcolumns: []
   },

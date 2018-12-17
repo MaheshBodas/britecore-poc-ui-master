@@ -28,7 +28,7 @@
           </el-col>              
         </el-row>      
         <el-row :gutter="20" v-for="i in rowCount" :key="i">
-          <el-col :span="8" v-for="entry in itemCountInRow(i)" :key="entry.id">
+          <el-col :span="8" v-for="entry in itemsInRow(i)" :key="entry.id">
             <el-form-item label="riskobj" size="mini" :prop ="entry.risk_type_field_name">              
               <span slot="label">{{ entry.risk_type_field_name | capitalize }}</span>
               <risk-input v-bind:input_type="entry" is-readonly></risk-input>		
@@ -67,7 +67,7 @@ export default {
     return {
       itemsPerRow: 2,
       readonly: true,
-      listLoading: true,
+      listLoading: false,
       carouselhelptext: [],
       selectRiskInstance: {
         riskinstance: ''
@@ -102,10 +102,10 @@ export default {
     }
   },
   methods: {
-    itemCountInRow: function(index) {
+    itemsInRow: function(index) {
       return this.riskobj.riskfields.slice((index - 1) * this.itemsPerRow, index * this.itemsPerRow)
     },
-    selectRiskInstanceChanged: function(selectedValue) {
+    selectRiskInstanceChanged(selectedValue) {
       // this.resetRiskFormData()
       if (this.selectRiskInstance.riskinstance !== '') {
         this.fetchRiskInstanceData()
@@ -127,6 +127,7 @@ export default {
           this.listLoading = false
         }
       }).catch(() => {
+        this.listLoading = false
         this.$notify({
           title: 'Error',
           message: this.apiexception,
