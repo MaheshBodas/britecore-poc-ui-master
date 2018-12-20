@@ -13,18 +13,21 @@ module.exports = {
     //proxyTable: {},
     proxyTable: {
       '/': {
-        target: 'http://localhost:9527',
+        // target: 'http://localhost:9527',
         // target: 'https://britecore-poc-server.herokuapp.com',
+        target: 'https://2pprl7yzie.execute-api.ap-southeast-1.amazonaws.com/dev',
         changeOrigin: true        
       },
       '/riskapi/v1': {
-        target: 'http://localhost:9527',
-        // target: 'https://britecore-poc-server.herokuapp.com:443',        
+        // target: 'http://localhost:9527',
+        // target: 'https://britecore-poc-server.herokuapp.com:443',
+        target: 'https://2pprl7yzie.execute-api.ap-southeast-1.amazonaws.com/dev',
         changeOrigin: true        
       },      
       '/auth': {
-        target: 'http://localhost:9527',
-        // target: 'https://britecore-poc-server.herokuapp.com',        
+        // target: 'http://localhost:9527',
+        // target: 'https://britecore-poc-server.herokuapp.com',
+        target: 'https://2pprl7yzie.execute-api.ap-southeast-1.amazonaws.com/dev',
         changeOrigin: true        
       }
     },
