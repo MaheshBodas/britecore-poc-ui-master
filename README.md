@@ -21,6 +21,9 @@ npm run dev
 # build for production with minification
 npm run build
 
+# Running unit test cases
+npm run test:unit
+
 # build for production and view the bundle analyzer report
 npm run build --report
 ```
